@@ -1,6 +1,6 @@
-FROM golang:alpine
+FROM golang:buster
 
-RUN apk add git
-RUN go get github.com/DATA-DOG/godog/cmd/godog
+RUN go env -w GO111MODULE=on
+RUN go get -v github.com/DATA-DOG/godog/cmd/godog
 
 WORKDIR /go
