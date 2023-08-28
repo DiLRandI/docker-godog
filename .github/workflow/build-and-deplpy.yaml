@@ -1,0 +1,29 @@
+name: Build and Deploy docker
+
+on:
+  # Run 1st of every month at 00:00
+  schedule:
+    - cron: '0 0 1 * *'
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+  steps:
+    # Checkout the repo
+    - uses: actions/checkout@v3
+    # build image using make
+    - name: Build image
+      run: make build
+    # Login to docker hub
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+    # Push image to docker hub
+    - name: Push image
+      run: make push
+    # Push latest tag to docker hub
+    - name: Push latest tag
+      run: make push-latest
