@@ -14,7 +14,8 @@ jobs:
 
   steps:
     # Checkout the repo
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
     # build image using make
     - name: Build image
       run: make build
@@ -23,7 +24,7 @@ jobs:
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
     # Push image to docker hub
     - name: Push image
-      run: make push
+      run: make push TAG=$(date +%Y.%m.%d)
     # Push latest tag to docker hub
     - name: Push latest tag
       run: make push-latest

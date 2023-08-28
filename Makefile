@@ -1,5 +1,3 @@
-.PHONY build tag tag-latest push push-latest
-
 DOCKER_REPO=deleema1/godog
 BUILD_TAG=local
 TAG=?latest

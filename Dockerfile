@@ -1,6 +1,5 @@
 FROM golang:buster
 
-RUN go env -w GO111MODULE=on
-RUN go get -v github.com/DATA-DOG/godog/cmd/godog
+RUN go install github.com/cucumber/godog/cmd/godog@latest
 
 WORKDIR /go
